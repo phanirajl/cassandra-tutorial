@@ -11,12 +11,12 @@ import reactor.core.publisher.Mono;
  *
  * @author alitvinov
  */
-public interface RoomsRepository extends ReactiveCassandraRepository<Room, String>{
-    
-    @Query("select r from Room r where hotel = :hotel and room = :room")
-    Mono<Room> getRoom(@Param("hotel") String hotel, 
+public interface RoomsRepository extends ReactiveCassandraRepository<Room, String> {
+
+    @Query("select * from demo.rooms where hotel_id = :hotel and room_number = :room")
+    Mono<Room> getRoom(@Param("hotel") String hotel,
             @Param("room") int room);
-    
-    @Query("select r from Room r where hotel = :hotel")
+
+    @Query("select * from demo.rooms where hotel_id = :hotel")
     Flux<Room> getRoomsForHotel(@Param("hotel") String hotel);
 }

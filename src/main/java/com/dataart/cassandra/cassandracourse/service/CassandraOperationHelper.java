@@ -2,7 +2,6 @@ package com.dataart.cassandra.cassandracourse.service;
 
 import com.dataart.cassandra.cassandracourse.exception.PrimaryKeyDuplicateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.data.cassandra.core.InsertOptions;
 import org.springframework.data.cassandra.core.ReactiveCassandraOperations;
 import org.springframework.data.cassandra.core.WriteResult;
@@ -20,8 +19,6 @@ public class CassandraOperationHelper {
     @Autowired
     private ReactiveCassandraOperations reactiveCassandraTemplate;
 
-    @Autowired
-    private CassandraOperations cassandraTemplate;
     /**
      * Adding of new item to Cassandra.
      *
@@ -35,7 +32,7 @@ public class CassandraOperationHelper {
      * https://docs.spring.io/spring/docs/5.0.0.BUILD-SNAPSHOT/spring-framework-reference/html/web-reactive.html
      *
      */
-    public <T> Mono<T> insertIfNotExists(final T item) {        
+    public <T> Mono<T> insertIfNotExists(final T item) {
         Mono<WriteResult> wr = reactiveCassandraTemplate.insert(item, InsertOptions.builder().withIfNotExists().build());
         return wr.map(res -> {
             if (!res.wasApplied()) {
@@ -47,4 +44,5 @@ public class CassandraOperationHelper {
             return item;
         });
     }
+
 }

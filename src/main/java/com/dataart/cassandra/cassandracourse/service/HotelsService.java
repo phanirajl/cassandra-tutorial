@@ -14,39 +14,30 @@ import reactor.core.publisher.Mono;
  * @author alitvinov
  */
 @Component
-public class HotelsService{
+public class HotelsService {
 
     @Autowired
     private HotelsRepository hotelRepository;
-    
+
     @Autowired
     private CassandraOperationHelper cassandraHelper;
-    
-    /**
-     * Get all hotels by city.
-     *
-     * @param city name of city
-     * @return all hotels for this city
-     *
-     * @see According to task description, should be async, it is implemented
-     * using Flux.
-     */
-    public Flux<Hotel> getHotelsByCity(String city) {                        
+
+    public Flux<Hotel> getHotelsByCity(String city) {
         return hotelRepository.findByCity(city);
+
     }
-    
-    /**
-     * Adding of room to hotel.
-     * 
-     * @param room room
-     * @return Room instance
-     */
-    public Mono<Room> addRoom(Room room) {                
-        Boolean hotelExists = hotelRepository.existsById(room.getHotel()).block();
-        if (!hotelExists) {
-            throw new ApplicationLogicException(String.format("Hotel with id %s note exists", room.getHotel()));
-        }
-        return cassandraHelper.insertIfNotExists(room);
+
+    public Mono<Room> addRoom(Room room) {
+        Mono<Boolean> hotelExists
+                = hotelRepository.existsById(room.getHotel());
+
+        Mono<Room> addRoomResult = hotelExists.flatMap(b -> {
+            if (!b) {
+                throw new ApplicationLogicException(String.format("Hotel %s not exists.", room.getHotel()));
+            }
+            return cassandraHelper.insertIfNotExists(room);
+        });
+        return addRoomResult;
     }
-    
+
 }

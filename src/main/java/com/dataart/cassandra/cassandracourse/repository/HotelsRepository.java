@@ -8,8 +8,8 @@ import reactor.core.publisher.Flux;
  *
  * @author alitvinov
  */
-public interface HotelsRepository extends ReactiveCassandraRepository<Hotel, String>{
-    
-    Flux<Hotel> findByCity(String city);    
-    
+public interface HotelsRepository extends ReactiveCassandraRepository<Hotel, String> {
+
+    Flux<Hotel> findByCity(String city);
+
 }

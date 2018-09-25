@@ -1,4 +1,3 @@
-
 package com.dataart.cassandra.cassandracourse.domain;
 
 import java.math.BigDecimal;
@@ -13,36 +12,36 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 /**
  * Room in hotel.
- * 
+ *
  * @author alitvinov
  */
 @Data
 @Table(value = "rooms")
 public class Room {
-    
+
     @PrimaryKeyColumn(name = "hotel_id", type = PARTITIONED)
-    @NotNull    
+    @NotNull
     private String hotel;
-    
+
     @PrimaryKeyColumn(name = "room_number", type = PARTITIONED)
     @NotNull
     @Positive
     @Min(1L)
-    private int roomNumber;  
-    
+    private int roomNumber;
+
     @Column(value = "floor")
     @Positive
-    @Min(1L)    
+    @Min(1L)
     @NotNull
     private int floor;
-    
+
     @NotNull
     @Column(value = "square")
-    @Positive    
+    @Positive
     private BigDecimal square;
-    
+
     @NotNull
     @Column(value = "price")
     @Positive
-    private BigDecimal price;    
+    private BigDecimal price;
 }

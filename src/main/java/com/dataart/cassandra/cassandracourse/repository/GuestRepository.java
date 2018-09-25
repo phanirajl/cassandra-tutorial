@@ -7,6 +7,6 @@ import org.springframework.data.cassandra.repository.ReactiveCassandraRepository
  *
  * @author alitvinov
  */
-public interface GuestRepository  extends ReactiveCassandraRepository<Guest, String>{
-    
+public interface GuestRepository extends ReactiveCassandraRepository<Guest, String> {
+
 }

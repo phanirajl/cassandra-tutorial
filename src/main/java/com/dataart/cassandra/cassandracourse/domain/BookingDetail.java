@@ -10,6 +10,10 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 /**
+ * Booking detail record.
+ *
+ * is used as helper table for Booking, that gives an opportunity to search with
+ * date range.
  *
  * @author alitvinov
  */
@@ -18,19 +22,19 @@ import org.springframework.data.cassandra.core.mapping.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookingDetail {
-    
-    @PrimaryKeyColumn(name = "hotel_id", type = PrimaryKeyType.PARTITIONED)    
+
+    @PrimaryKeyColumn(name = "hotel_id", type = PrimaryKeyType.PARTITIONED)
     private String hotelId;
 
-    @PrimaryKeyColumn(name = "booking_date", type = PrimaryKeyType.PARTITIONED)        
+    @PrimaryKeyColumn(name = "booking_date", type = PrimaryKeyType.CLUSTERED)
     private Date bookingDate;
 
-    @PrimaryKeyColumn(name = "room", type = PrimaryKeyType.PARTITIONED)    
-    private int room;    
+    @PrimaryKeyColumn(name = "room", type = PrimaryKeyType.CLUSTERED)
+    private int room;
 
-    @Column(value = "start_date")    
+    @Column(value = "start_date")
     private Date startDate;
 
-    @Column(value = "end_date")    
-    private Date endDate;  
+    @Column(value = "end_date")
+    private Date endDate;
 }

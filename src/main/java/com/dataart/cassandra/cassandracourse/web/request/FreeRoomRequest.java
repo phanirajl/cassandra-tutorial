@@ -13,14 +13,14 @@ import lombok.Data;
 public class FreeRoomRequest {
 
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private String hotel;
-    
+
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
-    
+
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd HH")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 }

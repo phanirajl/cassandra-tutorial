@@ -26,7 +26,7 @@ public class CassandraDataInitializer {
     private Cluster cluster;
 
     public final static String KEYSPACE_NAME = "demo";
-    
+
     @PostConstruct
     private void afterPropertiesSet() {
         if (createSchema) {

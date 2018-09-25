@@ -47,7 +47,7 @@ insert into demo.guests(login, first_name, last_name) values ('petrovpetr@gmail.
 
 DROP TABLE IF EXISTS demo.bookings;
 
-CREATE TABLE demo.bookings (hotel_id text, start_date timestamp, end_date timestamp, login text, room int, price double, guest_number int, PRIMARY KEY ((hotel_id), start_date, end_date, room));
+CREATE TABLE demo.bookings (hotel_id text, start_date timestamp, end_date timestamp, login text, room int, price decimal, guest_number int, PRIMARY KEY ((hotel_id), start_date, end_date, room));
 
 insert into demo.bookings(hotel_id, start_date, end_date, room, price, guest_number, login) values('hilton-usa-1', '2017-05-05', '2017-05-08', 1, 100.0, 1, 'ivanivanov@gmail.com');
 insert into demo.bookings(hotel_id, start_date, end_date, room, price, guest_number, login) values('hilton-usa-1', '2017-05-09', '2017-05-12', 1, 100.0, 1, 'ivanivanov@gmail.com');
@@ -55,7 +55,7 @@ insert into demo.bookings(hotel_id, start_date, end_date, room, price, guest_num
 
 DROP TABLE IF EXISTS demo.bookings_period_detail;
 
-CREATE TABLE demo.bookings_period_detail (hotel_id text, booking_date timestamp, room int, start_date timestamp, end_date timestamp, PRIMARY KEY ((hotel_id, room), booking_date));
+CREATE TABLE demo.bookings_period_detail (hotel_id text, booking_date timestamp, room int, start_date timestamp, end_date timestamp, PRIMARY KEY ((hotel_id), booking_date, room));
 
 insert into demo.bookings_period_detail(hotel_id, booking_date, room, start_date, end_date) values('hilton-usa-1', '2017-05-05', 1, '2017-05-05', '2017-05-08');
 insert into demo.bookings_period_detail(hotel_id, booking_date, room, start_date, end_date) values('hilton-usa-1', '2017-05-06', 1, '2017-05-05', '2017-05-08');
